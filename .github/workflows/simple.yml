@@ -6,6 +6,9 @@ jobs:
   run-shell-command:
     runs-on: ubuntu-latest
     steps:
+      # step 0 
+      - name: Checkout
+        uses: actions/checkout@v1
       # step 1
       - name: echo a string
         run: echo "Hello World Actions!"
@@ -20,7 +23,7 @@ jobs:
           echo $GITHUB_WORKSPACE
           pwd
           ls -la
-          content=`cat $GITHUB_WORKSPACE/settings.json`
-          echo "::set-output name=settingsJson::$content"
+        # content=`cat $GITHUB_WORKSPACE/settings.json`
+        # echo "::set-output name=settingsJson::$content"
       - run: |
           echo "${{fromJson(steps.set_var.outputs.settingsJson).version}}"
