@@ -15,10 +15,9 @@ jobs:
         run: |
           content=`cat $GITHUB_WORKSPACE/settings.json`
           echo "::set-output name=matrix::$content"
-          echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
   job2:
     needs: job1
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo "${{fromJson(needs.job1.outputs.matrix).version}}"
+      - run: |
+          echo "${{fromJson(needs.job1.outputs.matrix)}}"
