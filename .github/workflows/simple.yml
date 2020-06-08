@@ -23,7 +23,7 @@ jobs:
           echo $content
           echo "%%%%%%%%%%%%%%%%%%%%%%%%%%"
           echo "--------------------------"
-          echo $content | jq '.'
+          echo $content | jq '.needsDeploying'
           echo "--------------------------"
   build:
     runs-on: ubuntu-latest
