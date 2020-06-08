@@ -16,8 +16,12 @@ jobs:
           content=`cat $GITHUB_WORKSPACE/settings.json`
           echo "::set-output name=matrix::$content"
           echo $content
+          echo "**************************"
           echo steps.job1.outputs.matrix
+          echo "**************************"
+          echo "--------------------------"
           echo $matrix | jq '.needsDeploying'
+          echo "--------------------------"
   build:
     runs-on: ubuntu-latest
     steps:
