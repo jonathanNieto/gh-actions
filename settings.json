@@ -1,0 +1,6 @@
+{
+    "p1": "value1",
+    "p2": "value2",
+    "needsDeploying": false,
+    "enviroment": "localhost"
+}

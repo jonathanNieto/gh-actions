@@ -15,3 +15,9 @@ jobs:
         run: |
           node -v
           npm -v
+      - id: set_var
+        run: |
+          content=`cat $GITHUB_WORKSPACE/settings.json`
+          echo "::set-output name=settingsJson::$content"
+      - run: |
+          echo "${{fromJson(steps.set_var.outputs.settingsJson).version}}"
