@@ -3,29 +3,26 @@ name: Shell Commands
 on: [push]
 
 jobs:
-  run-shell-command:
+  job0:
     runs-on: ubuntu-latest
     steps:
       # step 0 
       - name: Checkout
         uses: actions/checkout@v1
-      # step 1
-      - name: echo a string
-        run: echo "Hello World Actions!"
-      
-      # step 2
-      - name: multiline script
-        run: |
-          node -v
-          npm -v
-      - id: set_var
-        run: |
-          echo $GITHUB_WORKSPACE
-          pwd
-          ls -la
-          cat $GITHUB_WORKSPACE/settings.json
-          content=`cat $GITHUB_WORKSPACE/settings.json`
-          echo "::set-output name=jsonvalue::$content"
-      - run: |
-          echo jsonvalue
-          echo "${{fromJson(steps.set_var.outputs.jsonvalue).version}}"
+  
+  job1:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+    - id: set-matrix
+      run: |
+        content=`cat $GITHUB_WORKSPACE/settings.json`
+        echo "::set-output name=matrix::$content"
+        echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "${{fromJson(needs.job1.outputs.matrix).version}}"
