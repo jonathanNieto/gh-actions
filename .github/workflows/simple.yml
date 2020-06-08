@@ -18,6 +18,8 @@ jobs:
       - id: set_var
         run: |
           echo $GITHUB_WORKSPACE
+          pwd
+          ls -la
           content=`cat $GITHUB_WORKSPACE/settings.json`
           echo "::set-output name=settingsJson::$content"
       - run: |
