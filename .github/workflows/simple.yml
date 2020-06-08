@@ -16,6 +16,19 @@ jobs:
           content=`cat $GITHUB_WORKSPACE/settings.json`
           echo "::set-output name=matrix::$content"
           echo $content
+          echo steps.job1.outputs.matrix
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: set output
+      id: set
+      run: |
+         echo ::set-output name=json_var::'[{ "name": "test", "client_payload": "111" }, { "name": "test2", "client_payload": "222" }] '
+    - name: use output
+      run: |
+        echo $json_var | jq '.[].name'
+      env:
+        json_var: ${{ steps.set.outputs.json_var}}
   job2:
     needs: job1
     runs-on: ubuntu-latest
