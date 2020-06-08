@@ -17,19 +17,17 @@ jobs:
           echo "::set-output name=matrix::$content"
           echo $content
           echo steps.job1.outputs.matrix
+          echo $matrix | jq '.[].name'
   build:
     runs-on: ubuntu-latest
     steps:
     - name: set output
       id: set
       run: |
-        content=`cat $GITHUB_WORKSPACE/settings.json`
-        echo "::set-output name=matrix::$content"
         echo ::set-output name=json_var::'[{ "name": "test", "client_payload": "111" }, { "name": "test2", "client_payload": "222" }] '
     - name: use output
       run: |
         echo $json_var | jq '.[].name'
-        echo $matrix | jq '.[].name'
       env:
         json_var: ${{ steps.set.outputs.json_var}}
   job2:
