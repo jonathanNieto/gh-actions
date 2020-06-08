@@ -17,7 +17,7 @@ jobs:
           echo "::set-output name=matrix::$content"
           echo $content
           echo steps.job1.outputs.matrix
-          echo $matrix | jq '.[].name'
+          echo $matrix | jq '.needsDeploying'
   build:
     runs-on: ubuntu-latest
     steps:
