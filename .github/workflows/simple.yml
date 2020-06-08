@@ -23,7 +23,8 @@ jobs:
           echo $GITHUB_WORKSPACE
           pwd
           ls -la
+          cat $GITHUB_WORKSPACE/settings.json
           content=`cat $GITHUB_WORKSPACE/settings.json`
-          echo "::set-output name=settingsJson::$content"
+          echo "::set-output name=jsonValue::$content"
       - run: |
-          echo "${{fromJson(steps.set_var.outputs.settingsJson).version}}"
+          echo "${{fromJson(steps.set_var.outputs.jsonValue).version}}"
