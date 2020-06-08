@@ -20,10 +20,10 @@ jobs:
           echo steps.job1.outputs.matrix
           echo "**************************"
           echo "%%%%%%%%%%%%%%%%%%%%%%%%%%"
-          echo $matrix
+          echo $content
           echo "%%%%%%%%%%%%%%%%%%%%%%%%%%"
           echo "--------------------------"
-          echo $matrix | jq '.'
+          echo $content | jq '.'
           echo "--------------------------"
   build:
     runs-on: ubuntu-latest
