@@ -24,7 +24,7 @@ jobs:
           echo "%%%%%%%%%%%%%%%%%%%%%%%%%%"
           echo "--------------------------"
           echo $content | jq '.needsDeploying'
-          needsDeploying=$content | jq '.needsDeploying'
+          needsDeploying=`$content | jq '.needsDeploying'`
           echo $needsDeploying
           echo "--------------------------"
   build:
