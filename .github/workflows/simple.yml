@@ -25,6 +25,7 @@ jobs:
           ls -la
           cat $GITHUB_WORKSPACE/settings.json
           content=`cat $GITHUB_WORKSPACE/settings.json`
-          echo "::set-output name=jsonValue::$content"
+          echo "::set-output name=jsonvalue::$content"
       - run: |
-          echo "${{fromJson(steps.set_var.outputs.jsonValue).version}}"
+          echo jsonvalue
+          echo "${{fromJson(steps.set_var.outputs.jsonvalue).version}}"
